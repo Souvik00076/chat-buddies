@@ -21,7 +21,6 @@ export const generateRequest = async <T>(
       url.searchParams.append(key, queryParams[key]),
     );
   }
-  // Define fetch options based on method and body
   const options: RequestInit = {
     method: method,
     headers: {
