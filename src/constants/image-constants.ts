@@ -6,7 +6,7 @@ import IconMessageListNormal from "../assets/icon_messagelist_normal.png";
 import IconMessageListPrimary from "../assets/icon_messagelist_primary.png";
 import IconSettingNormal from "../assets/icon_setting_normal.png";
 import IconSettingPrimary from "../assets/icon_settings_primary.png";
-
+import IconLogoPrimary from "../assets/icon_logo.png";
 export {
   IconSettingNormal,
   IconMessageListNormal,
@@ -16,4 +16,5 @@ export {
   IconMessageListPrimary,
   IconCallListPrimary,
   IconBookMarkListPrimary,
+  IconLogoPrimary,
 };

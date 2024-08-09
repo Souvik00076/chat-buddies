@@ -1,10 +1,15 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { Nav } from "../components/shared";
+import { NAV_ITEMS } from "../constants";
 
 export const Dashboard: FC = () => {
+  const [selectedItem, setSelectedItem] = useState<keyof typeof NAV_ITEMS>(
+    NAV_ITEMS.NOT_SELECTED,
+  );
   return (
     <div className="h-screen flex items-center">
-      <div className="h-full w-[100px] bg-nav-color"></div>
+      <Nav selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
       <Outlet />
     </div>
   );
