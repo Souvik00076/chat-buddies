@@ -11,6 +11,7 @@ import {
   IconSettingPrimary,
   NAV_ITEMS,
 } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 type TNavProp = {
   selectedItem: keyof typeof NAV_ITEMS;
@@ -18,14 +19,13 @@ type TNavProp = {
 };
 
 export const Nav: FC<TNavProp> = ({ selectedItem, setSelectedItem }) => {
-  // Define a function to determine the size and classes for each icon
+  const navigate = useNavigate();
   const getIconClasses = useCallback(
     (item: keyof typeof NAV_ITEMS) => {
       return `transition-transform duration-300  hover:cursor-pointer ${selectedItem === item ? "scale-125" : "scale-100"}`;
     },
     [selectedItem],
   );
-  // Define a function to determine the size and classes for each icon
 
   return (
     <div
@@ -45,7 +45,10 @@ export const Nav: FC<TNavProp> = ({ selectedItem, setSelectedItem }) => {
         width={42}
         height={42}
         className="hover:cursor-pointer"
-        onClick={() => setSelectedItem(NAV_ITEMS.NOT_SELECTED)}
+        onClick={() => {
+          setSelectedItem(NAV_ITEMS.NOT_SELECTED);
+          navigate("/");
+        }}
       />
       <div className="flex flex-col justify-evenly flex-1 items-center">
         <img
@@ -57,7 +60,10 @@ export const Nav: FC<TNavProp> = ({ selectedItem, setSelectedItem }) => {
           width={42}
           height={42}
           className={getIconClasses(NAV_ITEMS.CHAT)}
-          onClick={() => setSelectedItem(NAV_ITEMS.CHAT)}
+          onClick={() => {
+            setSelectedItem(NAV_ITEMS.CHAT);
+            navigate("chats");
+          }}
         />
         <img
           src={
@@ -68,7 +74,10 @@ export const Nav: FC<TNavProp> = ({ selectedItem, setSelectedItem }) => {
           width={42}
           height={42}
           className={getIconClasses(NAV_ITEMS.CALL)}
-          onClick={() => setSelectedItem(NAV_ITEMS.CALL)}
+          onClick={() => {
+            setSelectedItem(NAV_ITEMS.CALL);
+            navigate("calls");
+          }}
         />
         <img
           src={
@@ -79,7 +88,10 @@ export const Nav: FC<TNavProp> = ({ selectedItem, setSelectedItem }) => {
           width={42}
           height={42}
           className={getIconClasses(NAV_ITEMS.BOOKMARK)}
-          onClick={() => setSelectedItem(NAV_ITEMS.BOOKMARK)}
+          onClick={() => {
+            setSelectedItem(NAV_ITEMS.BOOKMARK);
+            navigate("bookmarks");
+          }}
         />
         <img
           src={
@@ -90,7 +102,10 @@ export const Nav: FC<TNavProp> = ({ selectedItem, setSelectedItem }) => {
           width={48}
           height={48}
           className={getIconClasses(NAV_ITEMS.SETTING)}
-          onClick={() => setSelectedItem(NAV_ITEMS.SETTING)}
+          onClick={() => {
+            setSelectedItem(NAV_ITEMS.SETTING);
+            navigate("settings");
+          }}
         />
       </div>
     </div>
