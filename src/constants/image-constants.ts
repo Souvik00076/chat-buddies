@@ -7,6 +7,12 @@ import IconMessageListPrimary from "../assets/icon_messagelist_primary.png";
 import IconSettingNormal from "../assets/icon_setting_normal.png";
 import IconSettingPrimary from "../assets/icon_settings_primary.png";
 import IconLogoPrimary from "../assets/icon_logo.png";
+import IconEdit from "../assets/icon_edit.png";
+import IconStatusGreen from "../assets/icon_status_green.png";
+import IconStatusRed from "../assets/icon_status_red.png";
+import IconStatusYellow from "../assets/icon_status_yellow.png";
+import IconDropdownUp from "../assets/icon_dropdown_up.png";
+import IconDropdownDown from "../assets/icon_dropdown_down.png";
 export {
   IconSettingNormal,
   IconMessageListNormal,
@@ -17,4 +23,10 @@ export {
   IconCallListPrimary,
   IconBookMarkListPrimary,
   IconLogoPrimary,
+  IconEdit,
+  IconStatusGreen,
+  IconStatusRed,
+  IconStatusYellow,
+  IconDropdownUp,
+  IconDropdownDown,
 };

@@ -8,6 +8,7 @@ export type TUser = {
   email: string;
   userName: string;
   userId: string;
+  profilePhoto: string;
 };
 export type TUserContext = {
   user: TUser;

@@ -5,7 +5,6 @@ import {
   Contact,
   Dashboard,
   Message,
-  Profile,
   Setting,
 } from "../pages";
 import { Login, Signup } from "../components";
@@ -47,10 +46,7 @@ export const routes = [
         path: "contacts",
         element: <Contact />,
       },
-      {
-        path: "profile",
-        element: <Profile />,
-      },
+
       {
         path: "settings",
         element: <Setting />,

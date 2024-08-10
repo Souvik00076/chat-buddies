@@ -4,8 +4,9 @@ export const UserContext = createContext<TUserContext | null>(null);
 const UserContextProvider: FC<TContextProps> = ({ children }) => {
   const [user, setUser] = useState<TUser>({
     email: "",
-    userName: "",
+    userName: "Souvik Bhattacharjee",
     userId: "",
+    profilePhoto: "",
   });
   const value = {
     user,

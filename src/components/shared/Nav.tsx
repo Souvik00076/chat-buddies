@@ -12,12 +12,11 @@ import {
   NAV_ITEMS,
 } from "../../constants";
 import { useNavigate } from "react-router-dom";
-
+import { Profile } from "./Profile";
 type TNavProp = {
   selectedItem: keyof typeof NAV_ITEMS;
   setSelectedItem: Dispatch<SetStateAction<keyof typeof NAV_ITEMS>>;
 };
-
 export const Nav: FC<TNavProp> = ({ selectedItem, setSelectedItem }) => {
   const navigate = useNavigate();
   const getIconClasses = useCallback(
@@ -99,14 +98,15 @@ export const Nav: FC<TNavProp> = ({ selectedItem, setSelectedItem }) => {
               ? IconSettingPrimary
               : IconSettingNormal
           }
-          width={48}
-          height={48}
+          width={42}
+          height={42}
           className={getIconClasses(NAV_ITEMS.SETTING)}
           onClick={() => {
             setSelectedItem(NAV_ITEMS.SETTING);
             navigate("settings");
           }}
         />
+        <Profile />
       </div>
     </div>
   );
