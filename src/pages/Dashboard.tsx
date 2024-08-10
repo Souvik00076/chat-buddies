@@ -8,7 +8,7 @@ export const Dashboard: FC = () => {
     NAV_ITEMS.NOT_SELECTED,
   );
   return (
-    <div className="h-screen flex items-center">
+    <div className="h-screen w-screen flex items-center">
       <Nav selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
       <Outlet />
     </div>

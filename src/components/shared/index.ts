@@ -1,3 +1,3 @@
 import { Nav } from "./Nav";
-
-export { Nav };
+import { PageWrapper } from "./PageWrapper";
+export { Nav, PageWrapper };
