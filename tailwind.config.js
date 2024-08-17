@@ -9,6 +9,9 @@ export default {
       "nav-color": "#0f172a",
       "white-smoke": "#F5F5F5",
     },
+    boxShadow: {
+      "dark-sm": "0 1px 2px 0 rgba(255, 255, 255, 0.05)",
+    },
   },
   plugins: [daisyui],
   daisyui: {

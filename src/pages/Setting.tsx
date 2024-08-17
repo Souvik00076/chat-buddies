@@ -4,6 +4,7 @@ import {
   IconStatusGreen,
   IconStatusRed,
   IconStatusYellow,
+  STATUS,
 } from "../constants";
 import { DropdownModal, Profile } from "../components/shared";
 import { useUser } from "../hooks";
@@ -69,9 +70,13 @@ export const Setting: FC = () => {
       >
         <p className="text-xl">{userContext.user.userName}</p>
         <DropdownModal
-          contents={["Active", "Away", "Inactive"]}
+          contents={Object.values(STATUS)}
           images={[IconStatusGreen, IconStatusYellow, IconStatusRed]}
-          onClick={(st: string) => {}}
+          onClick={(status: string) => {
+            userContext.setUser((prev) => {
+              return { ...prev, status: status };
+            });
+          }}
           selected={"Active"}
         />
       </div>

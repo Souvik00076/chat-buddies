@@ -33,7 +33,7 @@ export const DropdownModal: FC<TDropdownModal> = ({
         modalRef.current &&
         !modalRef.current.contains(event.target as Node)
       ) {
-        setShowModal(!showModal);
+        setShowModal(false);
       }
     };
     document.addEventListener("mouseup", handleOutsideClickListener);
@@ -48,6 +48,7 @@ export const DropdownModal: FC<TDropdownModal> = ({
         justify-center 
         gap-x-1 
         w-[100px]
+        hover:cursor-pointer
         "
         onClick={() => setShowModal(!showModal)}
       >
@@ -75,6 +76,7 @@ export const DropdownModal: FC<TDropdownModal> = ({
             py-2
             bg-neutral-200
             rounded-xl
+            shadow-dark-sm
             `,
           )}
           ref={modalRef}

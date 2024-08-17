@@ -15,7 +15,7 @@ export const generateRequest = async <T>(
   params: RequestParams,
 ): Promise<T | undefined> => {
   const { path, queryParams, body, method } = params;
-  const url = new URL("localhost:8080/api/v1/" + path);
+  const url = new URL("http://localhost:8080/api/v1/" + path);
   if (queryParams) {
     Object.keys(queryParams).forEach((key) =>
       url.searchParams.append(key, queryParams[key]),
@@ -33,7 +33,7 @@ export const generateRequest = async <T>(
     throw new Error(`HTTP Error! Status : ${response.status}`);
   }
   const result: BackendResponseType<T> = await response.json();
-  if (!result.success) {
+  if (!result || !result.success) {
     throw new Error(result.message);
   }
   return result.data;

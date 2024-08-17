@@ -9,7 +9,8 @@ import {
 } from "../pages";
 import { Login, Signup } from "../components";
 import { Home } from "../pages/Home";
-import { NotFound } from "../pages/NotFound";
+import { PrivateRoute } from "../components/shared/PrivateRoute";
+
 export const routes = [
   {
     path: "auth",
@@ -28,7 +29,6 @@ export const routes = [
   {
     path: "/",
     element: <Dashboard />,
-    errorElement: <NotFound />,
     children: [
       {
         path: "bookmarks",
@@ -46,7 +46,6 @@ export const routes = [
         path: "contacts",
         element: <Contact />,
       },
-
       {
         path: "settings",
         element: <Setting />,

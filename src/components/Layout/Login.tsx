@@ -26,5 +26,5 @@ export const Login: FC = () => {
       setLoading(false);
     }
   }, [email, password]);
-  return <></>;
+  return <div></div>;
 };

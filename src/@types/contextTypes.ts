@@ -1,4 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
+import { STATUS } from "../constants";
 
 export type TThemeContext = {
   theme: boolean;
@@ -9,6 +10,8 @@ export type TUser = {
   userName: string;
   userId: string;
   profilePhoto: string;
+  status: (typeof STATUS)[keyof typeof STATUS];
+  isAutenticated: boolean;
 };
 export type TUserContext = {
   user: TUser;

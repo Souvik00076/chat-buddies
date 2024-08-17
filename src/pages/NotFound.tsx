@@ -1,5 +1,9 @@
 import { FC } from "react";
 
 export const NotFound: FC = () => {
-  return <></>;
+  return (
+    <>
+      <div>Hello Not Found</div>
+    </>
+  );
 };
