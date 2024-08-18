@@ -11,7 +11,6 @@ export const App: FC = () => {
     <ThemeContextProvider>
       <UserContextProvider>
         <RouterProvider router={router} />
-        <ToastContainer />
       </UserContextProvider>
     </ThemeContextProvider>
   );

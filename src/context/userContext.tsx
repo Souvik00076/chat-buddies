@@ -12,18 +12,28 @@ const UserContextProvider: FC<TContextProps> = ({ children }) => {
     userId: "",
     profilePhoto: "",
     status: STATUS.INACTIVE,
-    isAutenticated: false,
+    isAuthenticated: false,
   });
   useEffect(() => {
     (async () => {
       try {
-        const data = await generateRequest<TUser>({
+        const accessToken = localStorage.getItem("x-access-token");
+        const refreshToken = localStorage.getItem("refreshToken");
+        if (!accessToken || !refreshToken) {
+          throw new Error("Unauthorized");
+        }
+        const data = (await generateRequest<TUser>({
           path: "verify-token",
           method: "GET",
-        });
-        setUser({ ...(data as TUser), isAutenticated: true });
+          headers: {
+            authorization: accessToken,
+          },
+        })) as TUser;
+        setUser({ ...data });
       } catch (error) {
-        toastError("Unauthorized User");
+        toastError(
+          error instanceof Error ? error.message : "Something went wrong",
+        );
       }
     })();
   }, []);

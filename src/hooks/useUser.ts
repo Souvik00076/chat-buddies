@@ -6,6 +6,5 @@ export const useUser = () => {
   if (context === null) {
     throw new Error("Context must be within context provider");
   }
-
   return context;
 };

@@ -9,11 +9,10 @@ export const Dashboard: FC = () => {
     NAV_ITEMS.NOT_SELECTED,
   );
   const navigate = useNavigate();
-  const isAuthenticated = useUser().user?.isAutenticated;
+  const user = useUser().user;
   useEffect(() => {
-    console.log(isAuthenticated);
-    if (!isAuthenticated) navigate("/auth/login");
-  }, [isAuthenticated, navigate]);
+    if (!user.isAuthenticated) navigate("/auth/login");
+  }, [user, navigate]);
 
   return (
     <div className="h-screen flex items-center">

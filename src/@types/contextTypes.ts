@@ -11,7 +11,7 @@ export type TUser = {
   userId: string;
   profilePhoto: string;
   status: (typeof STATUS)[keyof typeof STATUS];
-  isAutenticated: boolean;
+  isAuthenticated: boolean;
 };
 export type TUserContext = {
   user: TUser;

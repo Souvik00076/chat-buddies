@@ -9,7 +9,6 @@ import {
 } from "../pages";
 import { Login, Signup } from "../components";
 import { Home } from "../pages/Home";
-import { PrivateRoute } from "../components/shared/PrivateRoute";
 
 export const routes = [
   {
