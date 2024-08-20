@@ -1,6 +1,9 @@
 import { FC } from "react";
 import {
+  ACCORDION_EDITABLE_TYPE,
   IconEdit,
+  IconPrivacy,
+  IconProfile,
   IconStatusGreen,
   IconStatusRed,
   IconStatusYellow,
@@ -8,8 +11,24 @@ import {
 } from "../constants";
 import { DropdownModal, Profile } from "../components/shared";
 import { useUser } from "../hooks";
+import { useLoaderData } from "react-router-dom";
+import { CommonAccordion1Level } from "../components/Layout/CommonAccordion1Level";
+
+type TLoader = {
+  personalInfo: {
+    userName: string;
+    email: string;
+    location: string;
+  };
+  privacyInfo: {
+    displayStatus: boolean;
+    readRecipient: boolean;
+    showLastSeen: boolean;
+  };
+};
 export const Setting: FC = () => {
   const userContext = useUser();
+  const data: TLoader = useLoaderData() as unknown as TLoader;
   return (
     <div
       className="w-[400px]
@@ -80,6 +99,64 @@ export const Setting: FC = () => {
           selected={"Active"}
         />
       </div>
+      <CommonAccordion1Level
+        data={(() => {
+          const structuredData: {
+            header: string;
+            icon: string;
+            content: {
+              [key: string]: {
+                value: string | boolean;
+                type: ACCORDION_EDITABLE_TYPE;
+                isEditable: boolean;
+              };
+            };
+          }[] = [];
+          structuredData.push({
+            header: "Personal Info",
+            icon: IconProfile,
+            content: {
+              name: {
+                value: data.personalInfo.userName,
+                type: ACCORDION_EDITABLE_TYPE.TEXT,
+                isEditable: true,
+              },
+              email: {
+                value: data.personalInfo.email,
+                type: ACCORDION_EDITABLE_TYPE.TEXT,
+                isEditable: false,
+              },
+              location: {
+                value: data.personalInfo.location,
+                type: ACCORDION_EDITABLE_TYPE.TEXT,
+                isEditable: true,
+              },
+            },
+          });
+          structuredData.push({
+            header: "Privcy",
+            icon: IconPrivacy,
+            content: {
+              status: {
+                value: data.privacyInfo.displayStatus,
+                type: ACCORDION_EDITABLE_TYPE.CHECKBOX,
+                isEditable: true,
+              },
+              readRecipient: {
+                value: data.privacyInfo.readRecipient,
+                type: ACCORDION_EDITABLE_TYPE.CHECKBOX,
+                isEditable: true,
+              },
+              lastSeen: {
+                value: data.privacyInfo.showLastSeen,
+                type: ACCORDION_EDITABLE_TYPE.CHECKBOX,
+                isEditable: true,
+              },
+            },
+          });
+          return structuredData;
+        })()}
+      />
     </div>
   );
 };

@@ -17,17 +17,9 @@ const UserContextProvider: FC<TContextProps> = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        const accessToken = localStorage.getItem("x-access-token");
-        const refreshToken = localStorage.getItem("refreshToken");
-        if (!accessToken || !refreshToken) {
-          throw new Error("Unauthorized");
-        }
         const data = (await generateRequest<TUser>({
           path: "verify-token",
           method: "GET",
-          headers: {
-            authorization: accessToken,
-          },
         })) as TUser;
         setUser({ ...data });
       } catch (error) {

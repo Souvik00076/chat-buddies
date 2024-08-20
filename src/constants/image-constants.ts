@@ -13,6 +13,8 @@ import IconStatusRed from "../assets/icon_status_red.png";
 import IconStatusYellow from "../assets/icon_status_yellow.png";
 import IconDropdownUp from "../assets/icon_dropdown_up.png";
 import IconDropdownDown from "../assets/icon_dropdown_down.png";
+import IconPrivacy from "../assets/icon_privacy.png";
+import IconProfile from "../assets/icon_profile.png";
 export {
   IconSettingNormal,
   IconMessageListNormal,
@@ -29,4 +31,6 @@ export {
   IconStatusYellow,
   IconDropdownUp,
   IconDropdownDown,
+  IconPrivacy,
+  IconProfile,
 };

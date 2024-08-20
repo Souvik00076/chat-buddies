@@ -5,7 +5,6 @@ type RequestParams = {
     [key: string]: unknown;
   };
   method: "GET" | "POST" | "PUT" | "DELETE"; // Add more methods as needed
-  headers?: Record<string, string>;
 };
 interface BackendResponseType<T> extends Response {
   success: boolean;
@@ -15,8 +14,13 @@ interface BackendResponseType<T> extends Response {
 export const generateRequest = async <T>(
   params: RequestParams,
 ): Promise<T | undefined> => {
-  const { path, queryParams, body, method, headers } = params;
+  const { path, queryParams, body, method } = params;
+  const headers: Record<string, string> = {};
   const url = new URL("http://localhost:8080/api/v1/" + path);
+  const accessToken = localStorage.getItem("x-access-token");
+  if (accessToken) {
+    headers["authorization"] = accessToken;
+  }
   if (queryParams) {
     Object.keys(queryParams).forEach((key) =>
       url.searchParams.append(key, queryParams[key]),

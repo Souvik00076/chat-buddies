@@ -5,8 +5,8 @@ import { useUser } from "../hooks";
 export const Auth: FC = () => {
   const navigate = useNavigate();
   const user = useUser().user;
-
   useEffect(() => {
+    console.log(user);
     if (user.isAuthenticated) navigate(-1);
   }, [user, navigate]);
   return (
