@@ -15,6 +15,7 @@ import IconDropdownUp from "../assets/icon_dropdown_up.png";
 import IconDropdownDown from "../assets/icon_dropdown_down.png";
 import IconPrivacy from "../assets/icon_privacy.png";
 import IconProfile from "../assets/icon_profile.png";
+import IconEdit2 from "../assets/icon_edit2.png";
 export {
   IconSettingNormal,
   IconMessageListNormal,
@@ -33,4 +34,5 @@ export {
   IconDropdownDown,
   IconPrivacy,
   IconProfile,
+  IconEdit2,
 };

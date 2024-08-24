@@ -10,9 +10,9 @@ import {
   STATUS,
 } from "../constants";
 import { DropdownModal, Profile } from "../components/shared";
-import { useUser } from "../hooks";
-import { useLoaderData } from "react-router-dom";
+import { useDebounce, useUser } from "../hooks";
 import { CommonAccordion1Level } from "../components/Layout/CommonAccordion1Level";
+import { generateRequest } from "../services";
 
 type TLoader = {
   personalInfo: {
@@ -27,12 +27,39 @@ type TLoader = {
   };
 };
 export const Setting: FC = () => {
-  const userContext = useUser();
-  const data: TLoader = useLoaderData() as unknown as TLoader;
+  const { user, setUser } = useUser();
+  const data: TLoader = {
+    personalInfo: {
+      userName: user.userName,
+      email: user.email,
+      location: user.location,
+    },
+    privacyInfo: {
+      displayStatus: user.displayStatus,
+      readRecipient: user.readRecipt,
+      showLastSeen: user.lastSeen,
+    },
+  };
+  const patchSettings = async (
+    key: string,
+    value: boolean | string,
+  ): Promise<boolean> => {
+    try {
+      await generateRequest({
+        path: "chat-buddies/profile",
+        method: "PATCH",
+        queryParams: { [key]: value },
+      });
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  const onTextChange = useDebounce(patchSettings, 300);
+
   return (
     <div
       className="w-[400px]
-      bg-white-smoke 
       overflow-y-hidden
       h-full
       flex
@@ -70,7 +97,7 @@ export const Setting: FC = () => {
         </div>
         <Profile
           isEditable={true}
-          src={userContext.user.profilePhoto}
+          src={user.profilePhoto}
           size="100"
           style="bottom-[-50px] 
           absolute 
@@ -87,16 +114,20 @@ export const Setting: FC = () => {
         items-center
         "
       >
-        <p className="text-xl">{userContext.user.userName}</p>
+        <p className="text-xl">{user.userName}</p>
         <DropdownModal
           contents={Object.values(STATUS)}
           images={[IconStatusGreen, IconStatusYellow, IconStatusRed]}
-          onClick={(status: string) => {
-            userContext.setUser((prev) => {
-              return { ...prev, status: status };
+          onClick={async (status: string) => {
+            await patchSettings("status", status);
+            setUser((prev) => {
+              return {
+                ...prev,
+                status: status as (typeof STATUS)[keyof typeof STATUS],
+              };
             });
           }}
-          selected={"Active"}
+          selected={user.status}
         />
       </div>
       <CommonAccordion1Level
@@ -109,6 +140,7 @@ export const Setting: FC = () => {
                 value: string | boolean;
                 type: ACCORDION_EDITABLE_TYPE;
                 isEditable: boolean;
+                onChange?: (state: boolean | string) => Promise<boolean>;
               };
             };
           }[] = [];
@@ -120,6 +152,10 @@ export const Setting: FC = () => {
                 value: data.personalInfo.userName,
                 type: ACCORDION_EDITABLE_TYPE.TEXT,
                 isEditable: true,
+                onChange: async (state: boolean | string) => {
+                  await onTextChange("userName", state as string);
+                  return true;
+                },
               },
               email: {
                 value: data.personalInfo.email,
@@ -134,23 +170,35 @@ export const Setting: FC = () => {
             },
           });
           structuredData.push({
-            header: "Privcy",
+            header: "Privacy",
             icon: IconPrivacy,
             content: {
-              status: {
+              "Display Status": {
                 value: data.privacyInfo.displayStatus,
                 type: ACCORDION_EDITABLE_TYPE.CHECKBOX,
                 isEditable: true,
+                onChange: async (state: boolean | string) => {
+                  const flag = await patchSettings("displayStatus", state);
+                  return flag;
+                },
               },
-              readRecipient: {
+              "Read Recipient": {
                 value: data.privacyInfo.readRecipient,
                 type: ACCORDION_EDITABLE_TYPE.CHECKBOX,
                 isEditable: true,
+                onChange: async (state: boolean | string) => {
+                  const flag = await patchSettings("readRecipient", state);
+                  return flag;
+                },
               },
-              lastSeen: {
+              "Show Last Seen": {
                 value: data.privacyInfo.showLastSeen,
                 type: ACCORDION_EDITABLE_TYPE.CHECKBOX,
                 isEditable: true,
+                onChange: async (state: boolean | string) => {
+                  const flag = await patchSettings("lastSeen", state);
+                  return flag;
+                },
               },
             },
           });

@@ -44,14 +44,7 @@ export const Login: FC = () => {
       if (!data) {
         return;
       }
-      setUser({
-        email: data.email,
-        userName: data.userName,
-        userId: data.userId,
-        profilePhoto: data.profilePhoto,
-        status: data.status,
-        isAuthenticated: data.isAuthenticated,
-      });
+      setUser(data);
       localStorage.setItem("x-access-token", data.x_access_token);
       localStorage.setItem("refreshToken", data.refreshToken);
       navigate("/");

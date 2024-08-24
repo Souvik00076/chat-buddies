@@ -1,16 +1,12 @@
 type RequestParams = {
   path: string;
-  queryParams?: Record<string, string>;
+  queryParams?: Record<string, unknown>;
   body?: {
     [key: string]: unknown;
   };
-  method: "GET" | "POST" | "PUT" | "DELETE"; // Add more methods as needed
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH"; // Add more methods as needed
 };
-interface BackendResponseType<T> extends Response {
-  success: boolean;
-  message: string;
-  data?: T;
-}
+import { BackendResponseType } from "../@types";
 export const generateRequest = async <T>(
   params: RequestParams,
 ): Promise<T | undefined> => {

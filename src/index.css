@@ -1,3 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.opac-bg {
+  background-color: "#00A3FF";
+}
+.opac-bg::before {
+  z-index: -1;
+}
+.hide-scrollbar {
+  overflow: scroll; /* Allows scrolling */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+/* WebKit-based browsers (Chrome, Brave, Safari) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Hides scrollbar */
+}
+
+/* For the container of the content */
+.contentTransition {
+  transition:
+    height 0.3s ease-out,
+    opacity 0.1s ease-out;
+  z-index: -1;
+}

@@ -8,11 +8,15 @@ const UserContextProvider: FC<TContextProps> = ({ children }) => {
   const { toastError } = useToast();
   const [user, setUser] = useState<TUser>({
     email: "",
-    userName: "",
+    userName: "Souvik Bhattacharjee",
     userId: "",
     profilePhoto: "",
     status: STATUS.INACTIVE,
     isAuthenticated: false,
+    lastSeen: false,
+    readRecipt: false,
+    location: "",
+    displayStatus: false,
   });
   useEffect(() => {
     (async () => {

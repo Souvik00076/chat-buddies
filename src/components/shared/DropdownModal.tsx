@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { mergeStyles } from "../../utils";
 import { IconDropdownDown } from "../../constants";
 type TDropdownModal = {
@@ -20,12 +20,13 @@ export const DropdownModal: FC<TDropdownModal> = ({
   selected = contents[0],
 }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [selectedImage] = useState<string>(() => {
+  const getSelectedImage = useCallback(() => {
     const index = contents.findIndex((content) => {
       return content === selected;
     });
     return images[index];
-  });
+  }, [selected, images, contents]);
+
   const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const handleOutsideClickListener = (event: MouseEvent) => {
@@ -52,7 +53,12 @@ export const DropdownModal: FC<TDropdownModal> = ({
         "
         onClick={() => setShowModal(!showModal)}
       >
-        <img src={selectedImage} width={12} height={12} alt="Content Image" />
+        <img
+          src={getSelectedImage()}
+          width={12}
+          height={12}
+          alt="Content Image"
+        />
         <p>{selected}</p>
         <img
           src={IconDropdownDown}
@@ -85,10 +91,14 @@ export const DropdownModal: FC<TDropdownModal> = ({
             return (
               <div
                 className="flex 
+                    hover:cursor-pointer
                     items-center 
                     text-start
                     gap-x-2"
-                onClick={() => onClick(content)}
+                onClick={async () => {
+                  onClick(content);
+                  setShowModal(false);
+                }}
               >
                 <img
                   src={images[index]}

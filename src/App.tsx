@@ -4,7 +4,7 @@ import { routes } from "./constants";
 import ThemeContextProvider from "./context/ThemeContext";
 import UserContextProvider from "./context/userContext";
 import { ToastContainer } from "react-toastify";
-
+import "./index.css";
 export const App: FC = () => {
   const router = createBrowserRouter(routes);
   return (

@@ -12,6 +12,10 @@ export type TUser = {
   profilePhoto: string;
   status: (typeof STATUS)[keyof typeof STATUS];
   isAuthenticated: boolean;
+  lastSeen: boolean;
+  readRecipt: boolean;
+  location: string;
+  displayStatus: boolean;
 };
 export type TUserContext = {
   user: TUser;

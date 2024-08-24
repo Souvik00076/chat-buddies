@@ -9,7 +9,6 @@ import {
 } from "../pages";
 import { Login, Signup } from "../components";
 import { Home } from "../pages/Home";
-import { generateRequest } from "../services";
 
 export const routes = [
   {
@@ -49,13 +48,6 @@ export const routes = [
       {
         path: "settings",
         element: <Setting />,
-        loader: async () => {
-          const settings = await generateRequest({
-            path: "/chat-buddies/profile",
-            method: "GET",
-          });
-          return settings;
-        },
       },
       {
         index: true,
